@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:53:27 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/19 15:40:58 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:47:22 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdexcept>
 #include <vector>
 #include <numeric>
+
+#include <iostream>
 
 class Span {
 	private:
@@ -36,13 +38,12 @@ class Span {
 
 		
 		template <typename InIter>
-		void		addManyNumbers(InIter first, InIter end) {
+		void		addRange(InIter first, InIter end) {
 			while (first != end && current_i_ < N_) {
-			data_[current_i_++] = *first;
-			++first;
+				data_[current_i_++] = *first;
+				++first;
 			}
-			if (current_i_ >= N_)
+			if (current_i_ >= N_  && first != end)
 				throw std::out_of_range("Cannot add any more numbers!");
 		}
-
 };

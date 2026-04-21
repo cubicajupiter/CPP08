@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:06:32 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/19 15:40:43 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:47:21 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ void	Span::addNumber(int number) {
 unsigned	Span::shortestSpan() {
 	std::vector<int>	output(current_i_);
 
+	if (current_i_ < 2)
+		throw std::logic_error("Need at least two values for a comparison.");
 	std::sort(data_.begin(), data_.end());
 	std::adjacent_difference(data_.begin(), data_.end(), output.begin());
 	return *std::min_element(output.begin(), output.end());
 }
 
 unsigned	Span::longestSpan() const {
+	if (current_i_ < 2)
+		throw std::logic_error("Need at least two values for a comparison.");
 	int max = *std::max_element(data_.begin(), data_.end());
 	int min = *std::min_element(data_.begin(), data_.end());
 	return max - min;
