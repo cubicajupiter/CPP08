@@ -6,7 +6,7 @@
 #    By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 12:06:00 by jvalkama          #+#    #+#              #
-#    Updated: 2026/04/07 15:29:37 by jvalkama         ###   ########.fr        #
+#    Updated: 2026/04/21 12:54:02 by jvalkama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS			:=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
 INC			:=inc
 INCLUDES		:=-I $(INC)
-HEADER			:=$(INC)/
+HEADER			:=$(INC)/MutantStack.h
 
 COMPILER		:=c++
 CXXFLAGS		:=-Wall -Wextra -Werror -std=c++20
