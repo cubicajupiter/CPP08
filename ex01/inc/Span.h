@@ -6,16 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:53:27 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/20 17:47:22 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:48:46 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <algorithm>
-#include <stdexcept>
-#include <vector>
-#include <numeric>
+#pragma once
 
-#include <iostream>
+#include <vector>
+#include <stdexcept>
 
 class Span {
 	private:
@@ -35,12 +33,15 @@ class Span {
 
 		unsigned				getN() const;
 		const std::vector<int>&	getData() const;
+		unsigned				getCurrentI() const;
+		void					printContent() const;
 
 		
 		template <typename InIter>
 		void		addRange(InIter first, InIter end) {
 			while (first != end && current_i_ < N_) {
-				data_[current_i_++] = *first;
+				data_.push_back(*first);
+				current_i_++;
 				++first;
 			}
 			if (current_i_ >= N_  && first != end)

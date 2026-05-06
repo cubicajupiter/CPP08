@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 09:40:32 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/22 14:05:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/05/06 17:03:21 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	main() {
 		}
 
 		std::stack<int> s(mstack);
-		std::cout << s.top() << "\n";
 	}
 	{
 		std::cout << "\n\n\tLIST FOR COMPARISON (should be the same as above)\n";
@@ -104,8 +103,9 @@ int	main() {
 		std::cout << "\n\n\tSTRING OBJECTS & ALL ITERATORS\n";
 
 		MutantStack<std::string>	s;
+		std::cout << "Building a mutant-stack of three strings and printing it using mutant-stack iterators:\n";
 		for (int i = 0; i < 3; ++i) {
-			s.push("String nbr " + std::to_string(i) + ", ");
+			s.push("String nbr " + std::to_string(i));
 		}
 		MutantStack<std::string>::iterator 				it = s.begin();
 		MutantStack<std::string>::iterator 				ite = s.end();
@@ -116,33 +116,33 @@ int	main() {
 		MutantStack<std::string>::const_rev_iterator 	crit = s.crbegin();
 		MutantStack<std::string>::const_rev_iterator 	crite = s.crend();
 		{
-			std::cout << "Forward iterator:	";
+			std::cout << "Forward iterator:	'";
 			while (it != ite) {
-				std::cout << *it;
+				std::cout << *it << "', ";
 				++it;
 			}
 			std::cout << "\n";
 		}
 		{
-			std::cout << "Reverse iterator:	";
+			std::cout << "Reverse iterator:	'";
 			while (rit != rite) {
-				std::cout << *rit;
+				std::cout << *rit << "', ";
 				++rit;
 			}
 			std::cout << "\n";
 		}
 		{
-			std::cout << "Forward const iter:	";
+			std::cout << "Forward const iter:	'";
 			while (cit != cite) {
-				std::cout << *cit;
+				std::cout << *cit << "', ";
 				++cit;
 			}
 			std::cout << "\n";
 		}
 		{
-			std::cout << "Reverse const iter:	";
+			std::cout << "Reverse const iter:	'";
 			while (crit != crite) {
-				std::cout << *crit;
+				std::cout << *crit << "', ";
 				++crit;
 			}
 			std::cout << "\n";

@@ -6,25 +6,26 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:06:32 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/20 17:47:21 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:48:47 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.h"
+#include <iterator>
+#include <numeric>
+#include <stdexcept>
+#include <iostream>
+#include <algorithm>
 
 //DEFAULT CONSTRUCTOR
-Span::Span() : N_(0), current_i_(0) {}
+Span::Span() : N_(10), current_i_(0) {}
 
 //PARAMETER CONSTRUCTOR
-Span::Span(unsigned N) : N_(N), current_i_(0) {
-	data_ = std::vector<int>(N);
-	std::fill(data_.begin(), data_.end(), 0);
-}
+Span::Span(unsigned N) : N_(N), current_i_(0) {}
 
 //COPY CONSTRUCTOR
-Span::Span(const Span& other) : current_i_(0) {
-	N_ = other.getN();
-	data_ = std::vector<int>(N_);
+Span::Span(const Span& other) : N_(other.getN()), current_i_(other.getCurrentI()) {
+	data_ = std::vector<int>(current_i_);
 	std::vector<int> other_data = other.getData();
 	std::copy(other_data.begin(), other_data.end(), data_.begin());
 }
@@ -36,8 +37,8 @@ Span::~Span() {}
 Span&	Span::operator=(const Span& other) {
 	if (this != &other) {
 		N_ = other.getN();
-		current_i_ = 0;
-		data_ = std::vector<int>(N_);
+		current_i_ = other.getCurrentI();
+		data_ = std::vector<int>(current_i_);
 		std::vector<int> other_data = other.getData();
 		std::copy(other_data.begin(), other_data.end(), data_.begin());
 	}
@@ -50,9 +51,12 @@ Span&	Span::operator=(const Span& other) {
 void	Span::addNumber(int number) {
 	if (current_i_ >= N_)
 		throw std::out_of_range("Cannot add any more numbers!");
-	data_[current_i_++] = number;
+	data_.push_back(number);
+	current_i_++;
 }
 
+//current_i is two, but vector contains a third value, 0
+//sorted, the vector is 0, 2, 7
 unsigned	Span::shortestSpan() {
 	std::vector<int>	output(current_i_);
 
@@ -60,7 +64,7 @@ unsigned	Span::shortestSpan() {
 		throw std::logic_error("Need at least two values for a comparison.");
 	std::sort(data_.begin(), data_.end());
 	std::adjacent_difference(data_.begin(), data_.end(), output.begin());
-	return *std::min_element(output.begin(), output.end());
+	return *std::min_element(output.begin() + 1, output.end());
 }
 
 unsigned	Span::longestSpan() const {
@@ -80,4 +84,17 @@ unsigned	Span::getN() const {
 
 const std::vector<int>&	Span::getData() const {
 	return data_;
+}
+
+unsigned	Span::getCurrentI() const {
+	return current_i_;
+}
+
+//PRINT DATA_ ITEMS
+void	Span::printContent() const {
+	std::copy(
+		data_.begin(),
+		data_.end(),
+		std::ostream_iterator<typename std::vector<int>::value_type>(std::cout, " "));
+	std::cout << "\n";
 }

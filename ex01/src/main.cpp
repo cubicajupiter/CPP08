@@ -6,12 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:00:16 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/20 17:47:19 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:48:44 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <array>
+#include <numeric>
 #include "Span.h"
 
 int	main() {
@@ -25,20 +26,42 @@ int	main() {
 		sp.addNumber(9);
 		sp.addNumber(11);
 
+		std::cout << "Now contains: ";
+		sp.printContent();
+		std::cout << "Shortest span: ";
 		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << "Longest span: ";
 		std::cout << sp.longestSpan() << std::endl;
 	}
 	{
-		std::cout << "\nNOT ENOUGH VALUES\n";
+		std::cout << "\nFILLING AN EMPTY VECTOR AND BASIC COMPARISONS";
+		
 		Span sp = Span(3);
+		std::cout << "\nNow contains: ";
+		sp.printContent();
+
 		try {std::cout << sp.shortestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
-		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {};
+		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
+		
+		std::cout << "\t--adding in the integer 7--\n";
 		sp.addNumber(7);
+		std::cout << "Now contains: ";
+		sp.printContent();
+		
+		std::cout << "Shortest span: ";
 		try {std::cout << sp.shortestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
-		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {};
+		std::cout << "Longest span: ";
+		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
+		
+		std::cout << "\t--adding in the integer 2--\n";
 		sp.addNumber(2);
+		std::cout << "Now contains: ";
+		sp.printContent();
+		
+		std::cout << "Shortest span: ";
 		try {std::cout << sp.shortestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
-		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {};
+		std::cout << "Longest span: ";
+		try {std::cout << sp.longestSpan() << std::endl;} catch (std::exception& e) {std::cout << e.what() << "\n";};
 	}
 	{
 		std::cout << "\nRANGE OF ITERATORS -INSERTION FROM C-STYLE ARRAY\n";
@@ -50,8 +73,11 @@ int	main() {
 		} catch (std::out_of_range& e) {
 			std::cout << e.what() << "\n";
 		}
-		
+		std::cout << "Now contains: ";
+		sp.printContent();
+		std::cout << "Shortest span: ";
 		std::cout << sp.shortestSpan() << "\n";
+		std::cout << "Longest span: ";
 		std::cout << sp.longestSpan() << "\n";
 	}
 	{
@@ -64,8 +90,11 @@ int	main() {
 		} catch (std::out_of_range& e) {
 			std::cout << e.what() << "\n";
 		}
-		
+		std::cout << "Now contains: ";
+		sp.printContent();
+		std::cout << "Shortest span: ";
 		std::cout << sp.shortestSpan() << "\n";
+		std::cout << "Longest span: ";
 		std::cout << sp.longestSpan() << std::endl;
 	}
 	{
@@ -80,8 +109,9 @@ int	main() {
 		} catch (std::out_of_range& e) {
 			std::cout << e.what() << "\n";
 		}
-		std::vector<int> data = sp.getData();
+		std::cout << "Shortest span: ";
 		std::cout << sp.shortestSpan() << "\n";
+		std::cout << "Longest span: ";
 		std::cout << sp.longestSpan() << std::endl;
 	}
 	
